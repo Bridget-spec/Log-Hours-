@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Summary</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; text-align: center; }
+        h1 { color: #333; }
+        table { width: 80%; margin: 0 auto; border-collapse: collapse; margin-top: 20px; }
+        table, th, td { border: 1px solid #333; }
+        th, td { padding: 10px; text-align: center; }
+        th { background-color: #f2f2f2; }
+        a { display: inline-block; margin-top: 20px; text-decoration: none; padding: 10px 20px; color: #fff; background-color: #4CAF50; border-radius: 5px; }
+        a:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+    <h1>Weekly Summary of Hours and Earnings</h1>
+    {% if total_hours.empty %}
+        <p>No work hours logged for the current week.</p>
+    {% else %}
+        <table>
+            <tr>
+                <th>Client</th>
+                <th>Total Hours</th>
+                <th>Total Earnings</th>
+            </tr>
+            {% for row in total_hours.itertuples() %}
+            <tr>
+                <td>{{ row.Client }}</td>
+                <td>{{ row._2 }}</td>
+                <td>${{ row._3 }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+    <br>
+    <a href="/">Go Back</a>
+</body>
+</html>
